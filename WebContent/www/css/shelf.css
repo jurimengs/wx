@@ -1,0 +1,72 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{background-color:#eaeaea; margin:0; padding:0;}
+ul,li{margin:0; padding:0; list-style-type:none;}
+img{border:0px;}
+.flo_left{float:left;}
+.flo_right{float:right;}
+.clear{ clear:both;}
+.pos_rel{position:relative;}
+.pos_obso{position:absolute;}
+
+/***header***/
+.head{ height:44px; min-width: 320px; background-color:#1f3042;color:#FFF; font:normal 18px/40px "Microsoft Yahei";/*position:relative;*/}
+      @media (min-width: 640px) {
+  #head {
+    width: 100%;
+  }
+}
+.head a{ color:#fff; text-decoration:none; cursor:pointer;}
+.top_module_f{ width:100%; text-align:center; display:block; font-weight:bold; position:absolute;}
+.top_module_left{position:relative; z-index: 1; width:60px; text-align:center; background:url(/www/images/top_back.png) no-repeat left center; text-indent:15px; margin-left:10px;cursor:pointer;}
+.top_module_right{position:absolute;width:60px;right:0px;}
+
+/***main***/
+.main_mod{ padding:0px 12px 12px 12px;}
+.mod_public{ width:50%;height:106px; margin-top:12px;}
+.mod_public_whole{ width:100%;height:106px; margin-top:12px;}
+.mod_public_auto_h{ width:100%;height:auto; /*margin-top:12px;*/ background-color:#FFF;}
+.marg_rig_6{ background:#f6f6f6;margin-right:6px; height:106px;}
+.marg_lef_6{ background:#f6f6f6;margin-left:6px;height:106px;}
+
+.mod_title{margin-top:6px;font:normal 14px/40px "Microsoft Yahei";color:#888; display:block;}
+.mod_line{font:normal 16px/48px "Microsoft Yahei"; padding:0px 10px; border-bottom:1px solid #dbdbdb;}
+.mod_pic{font:normal 16px/68px "Microsoft Yahei"; padding:20px 10px; }
+.clo_gray{color:#999999;}
+
+.squre_avter {position:absolute;overflow: hidden;height: 54px;width: 54px;margin:12px 5px 12px 12px;text-align: center;background: #fff;-moz-border-radius: 38px;/* Gecko browsers*/-webkit-border-radius: 38px;/* Webkit browsers */ border-radius:38px;/* W3C syntax */}
+.inp_squre_sel{display: none; background:url(/www/images/selected-grey.png) no-repeat 5px 5px; width:16px; height:16px;z-index:1;}
+.inp_squre_inherit{ background:url(/www/images/inp_squre.png) no-repeat 5px 5px; width:16px; height:16px; z-index:1;}
+.descrip_rig{ margin:5px 5px 0px 75px;}
+.descrip_rig > h5{text-align:right; font:normal 12px/15px "Microsoft Yahei"; margin:0px; height:35px;float:right; clear:both;}
+.descrip_rig > font{text-align:right;font:bold 14px/35px "Microsoft Yahei"; margin:0px;color:#ff6600; float:right; clear:both;}
+.fen{ font:normal 9px "Microsoft Yahei";}
+
+.amount{clear:both; height:30px; background:#FFF; position:relative; padding:0px;}
+.amount a{ text-decoration:none;font:normal 12px/30px "Microsoft Yahei";}
+.amount img{ margin:8px 10px 0px 10px;}
+.amo_f{width:100%; text-align:center; display:block; font-weight:normal; position:absolute; line-height:30px; font-family:"Microsoft Yahei";}
+.amo_right{position:absolute;right:0px;}
+
+/***footer***/
+.footer{ width:100%;height:54px; background:#f7f7f7; margin-top:12px; position:fixed; bottom:0; line-height:54px;color:#666666; padding:0px;}
+.btn_change_val{border:0px; background:transparent;color:#cccccc; text-align:right; width:80px;}
+.btn_public{cursor:pointer; border:0px; font:normal 14px/30px "Microsoft Yahei";color:#fff; margin-left:10px;-moz-border-radius: 28px;/* Gecko browsers*/-webkit-border-radius: 28px;/* Webkit browsers */ border-radius:28px;/* W3C syntax */}
+.btn_collect{ background-color:#f1aa00; padding:0px 15px; margin-left:10px;}
+.btn_sunmit{ background-color:#f1aa00; padding:0px 45px; margin-left:10px;}
+.btn_cancel{ background-color:#888; padding:0px 45px; margin-left:10px;}
+.btn_local_pic{cursor:pointer;border:1px solid #f1aa00; background:transparent; font:normal 14px/30px "Microsoft Yahei";color:#f1aa00; margin-left:10px;-moz-border-radius: 3px;/* Gecko browsers*/-webkit-border-radius: 3px;/* Webkit browsers */ border-radius:3px;/* W3C syntax */}
+
+/***popmenu***/
+.drop_down{display: none; min-width: 55px; right:5px; top:47px; border:1px solid #c5c5c5;border-bottom:none;background-color:#fff; position: absolute; z-index: 2; -moz-border-radius: 2px;/* Gecko browsers*/-webkit-border-radius: 2px;/* Webkit browsers */ border-radius:2px;/* W3C syntax */box-shadow:1px 1px 2px #ccc;-moz-box-shadow:1px 1px 2px #ccc;-webkit-box-shadow:1px 1px 2px #ccc;}
+.drop_text{border-bottom:1px solid #c5c5c5; }
+.drop_text a{font:normal 16px/30px "Microsoft Yahei";color:#666666; padding:0px 20px;}
+.drop_text a:hover{ background-color:#f1aa00;color:#fff; font:normal 16px/40px "Microsoft Yahei"; display:block;cursor:pointer;}
+
+.short_input {border: 1px solid #ccc;}
+
+#recieveMoney {display: none;}
+#deleteBtn {display: none;}
+#upToShelf {display: none;}
+#downFromShelf {display: none;}

@@ -1,0 +1,46 @@
+/*background color start--------------------*/
+.bg-grey {
+	background-color:grey;
+}
+.bg-grey-snow1 {
+	background-color:#EEE9E9;
+}
+.bg-white {
+	background-color:white;
+}
+.bg-red {
+	background-color:red;
+}
+.bg-blue {
+	background-color:blue;
+}
+.bg-yellow {
+	background-color:yellow;
+}
+.bg-yellow-lemonchiffon {
+	background-color:#FFFACD;
+}
+.bg-green {
+	background-color:green;
+}
+.bg-purple {
+	background-color:purple;
+}
+.bg-purple-plum {
+	background-color:#DDA0DD;
+}
+.bg-purple-blueviolet {
+	background-color:#8A2BE2;
+}
+
+
+.bg-login-main {
+	background-color:#ffeaff;
+}
+.bg-login-user {
+	background-color:#eeffee;
+}
+.bg-login-company {
+	background-color:#cceecc;
+}
+/*background color end--------------------*/

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <script type="text/javascript" charset="utf-8" src="/www/js/cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/www/js/index.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/common.js"></script>
+    <title>Hello</title>
+    <script type="text/javascript" charset="utf-8">
+        function loadImage() {
+            //拍照并显示在屏幕
+            navigator.camera.getPicture(onLoadImageSuccess, onLoadImageFail, {destinationType: Camera.DestinationType.DATA_URL});
+        }
+        //拍照成功后回调
+        function onLoadImageSuccess(imageURI) {
+        	// 调试慎用.以防字符过长手机端卡死
+            //navigator.notification.alert(imageURI, null, "警告");
+            //这里的图片经过了base64编码
+            var src = "data:image/jpeg;base64," + imageURI;
+            $("#getImage").attr("src", src);
+            $("#getImage").show();
+        }
+        //所有获取图片失败都回调此函数
+        function onLoadImageFail(message) {
+            navigator.notification.alert("拍照失败，原因：" + message, null, "警告");
+        }
+        function loadImageLocal() {
+            //获取本地图片并显示在屏幕
+            navigator.camera.getPicture(onLoadImageLocalSuccess, onLoadImageFail, {
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+            });
+        }
+        //本地图片选择成功后回调此函数
+        function onLoadImageLocalSuccess(imageURI) {
+            $("#getImageLocal").attr("src", imageURI);
+            $("#getImageLocal").show();
+        }
+        function loadImageUpload() {
+            //拍照上传并显示在屏幕
+            navigator.camera.getPicture(onLoadImageUploadSuccess, onLoadImageFail, {
+                destinationType: Camera.DestinationType.FILE_URI,
+                quality: 50,
+                sourceType: 1,
+                allowEdit: true, // 剪裁框
+                targetWidth: 100, 
+                targetHeight: 100
+            });
+        }
+        //图片拍照成功后回调此函数
+        function onLoadImageUploadSuccess(imageURI) {
+            //此处执行文件上传的操作，上传成功后执行下面代码
+            var options = new FileUploadOptions(); //文件参数选项
+            options.fileKey = "file";//向服务端传递的file参数的parameter name
+            options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);//文件名
+            options.mimeType = "image/jpeg";//文件格式，默认为image/jpeg
+            var ft = new FileTransfer();//文件上传类
+            ft.onprogress = function (progressEvt) {//显示上传进度条
+                if (progressEvt.lengthComputable) {
+                    navigator.notification.progressValue(Math.round(( progressEvt.loaded / progressEvt.total ) * 100));
+                }
+            }
+            var src = imageURI;
+            navigator.notification.progressStart("提醒", "当前上传进度");
+            ft.upload(imageURI, encodeURI('http://192.168.22.171:7080/upload.do'), function () {
+            	try {
+            		var startLocation = imageURI.lastIndexOf("/")+1;
+                	var fileName = imageURI.substring(startLocation, imageURI.length);
+                    navigator.notification.progressStop();//停止进度条
+                    var serverFileName = "http://192.168.22.171:7080/files/"+ getYYYYMMDD()+"/"+fileName;
+                    $("#getImageUpload").attr("src", serverFileName);
+                    $("#imageUploadUrl").val(serverFileName);
+                    $("#getImageUpload").show();
+                    navigator.notification.alert("文件上传成功！", null, "提醒");
+            	} catch(e) {
+            		alert(e);
+            	}
+            }, null, options);
+        }
+    </script>
+</head>
+<body>
+<h1>货架管理</h1>
+
+<p>
+    <input type="button" value="拍照" onclick="loadImage();"/>
+    <img src="" id="getImage" style="display: none;width: 120px;height: 120px;"/>
+</p>
+
+<p>
+    <input type="button" value="本地图片" onclick="loadImageLocal();"/>
+    <img src="" id="getImageLocal" onclick="document.getElementById('imageLocalUrl').value=this.src;"  style="display: none;width: 120px;height: 120px;"/>
+</p>
+<p>
+    <input type="text" value="" id="imageLocalUrl" width="320"/>
+</p>
+
+<p>
+    <input type="button" value="拍照上传" onclick="loadImageUpload();"/>
+    <img src="" id="getImageUpload"  onclick="this.src=document.getElementById('imageUploadUrl').value; alert(this.src)" style="display: none;width: 120px;height: 120px;"/>
+</p>
+<p>
+    <input type="text" value="" id="imageUploadUrl" width="100%"/>
+</p>
+</body>
+</html>

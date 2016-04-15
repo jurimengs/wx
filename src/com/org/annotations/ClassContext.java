@@ -45,16 +45,21 @@ public class ClassContext {
      * @return
      */
     private void findAllClassFilesAndInitToContainer(String aimpath){
-    	String phyPath = ClassContext.class.getResource("ClassContext.class").getPath();
-		phyPath = phyPath.substring(0, phyPath.length() - "com.org.annotations.ClassContext.class".length());
+    	String phyPath = ClassContext.class.getClassLoader().getResource("").getPath();
+
+		//String phyPath = "/WEB-INF/classes/";
 		
-		String aimpathTemp = aimpath.replaceAll("\\.", "\\\\");
+		
+		String aimpathTemp = aimpath.replaceAll("\\.", "/");
+		
 		File file = new File(phyPath + aimpathTemp);
+		log.info("findAllClassFilesAndInitToContainer 读取目标路径: " + file.getPath());
 		List<File> fileList = new ArrayList<File>();
 		// 递归文件夹,　得到fileList
 		findAllClassFiles(file, fileList);
+		log.info("findAllClassFilesAndInitToContainer 读取目标class数量: " + fileList.size());
 		// 递归后，得到文件list, 再根据文件list　得到Classlist
-		initClassToContainer(fileList, aimpathTemp);
+		initClassToContainer(fileList, aimpath);
     }
     
     private void initClassToContainer(List<File> fileList, String aimpathTemp) {
@@ -72,7 +77,10 @@ public class ClassContext {
 	}
     
 	private void loadOrNot(String fileNameTemp) throws ClassNotFoundException {
-		Class<?> classTemp = Class.forName(fileNameTemp);
+		
+		Class<?> classTemp = ClassContext.class.getClassLoader().loadClass(fileNameTemp);
+		
+		//Class<?> classTemp = Class.forName(fileNameTemp);
 		if(classTemp.getAnnotation(Init.class) != null) {
 			try {
 				String classTempName = classTemp.getSimpleName();
@@ -88,9 +96,9 @@ public class ClassContext {
 	}
 
 	private String complainFilename(String fileNameTemp, String aimpathTemp){
-		fileNameTemp = fileNameTemp.substring(fileNameTemp.indexOf(aimpathTemp));
-		fileNameTemp = fileNameTemp.split("\\.")[0];
 		fileNameTemp = fileNameTemp.replaceAll("\\\\", "\\.");
+		fileNameTemp = fileNameTemp.substring(fileNameTemp.indexOf(aimpathTemp));
+		fileNameTemp = fileNameTemp.substring(0, fileNameTemp.lastIndexOf("."));
 		return fileNameTemp;
     }
 

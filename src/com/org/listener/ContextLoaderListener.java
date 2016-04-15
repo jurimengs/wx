@@ -59,9 +59,6 @@ public class ContextLoaderListener implements ServletContextListener{
 	 * 加载顺序有严格要求，不可乱
 	 */
 	public void contextInitialized(ServletContextEvent arg0) {
-		destroyJDBCDrivers();
-        destroySpecifyThreads();
-        
 		ServletContext servletContext =	arg0.getServletContext();
 	    PropertyUtil.initProperties(servletContext);
 		log.info("1. ==============> 配置文件 加载完成...");

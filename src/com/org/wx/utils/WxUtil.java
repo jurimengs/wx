@@ -148,8 +148,10 @@ public class WxUtil {
 	}
 	
 	public static void cancelAutoRun(){
-		timer.cancel();
-		timer = null;
+		if(timer != null) {
+			timer.cancel();
+			timer = null;
+		}
 	}
 
 	public static String replyStr(String replyMsg, JSONObject xmlJson) {

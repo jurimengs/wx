@@ -96,7 +96,7 @@ public class ClassContext {
 	}
 
 	private String complainFilename(String fileNameTemp, String aimpathTemp){
-		fileNameTemp = fileNameTemp.replaceAll("/", "\\.");
+		fileNameTemp = fileNameTemp.replaceAll("/", "\\.").replaceAll("\\\\", "\\.");
 		fileNameTemp = fileNameTemp.substring(fileNameTemp.indexOf(aimpathTemp));
 		fileNameTemp = fileNameTemp.substring(0, fileNameTemp.lastIndexOf("."));
 		return fileNameTemp;

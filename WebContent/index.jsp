@@ -40,7 +40,6 @@ a {text-decoration: none; }
 <body>
 	<div id="maindiv" class="div_main">
 		<%@ include file="/common/menu-new.jsp"%>
-		<div class="top_fix">&nbsp;</div>
 		<div class="div_main_words">
 			<table class="table_main_words" cellpadding="3" cellspacing="0">
 				<tr><td colspan="2" class="td_words_title">人生百科 - 我们的网上家园</td></tr>

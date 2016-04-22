@@ -12,10 +12,17 @@
 <meta name="keywords" content="人生百科">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link rel="stylesheet" href="/css/base.css">
+
+<link rel="stylesheet" href="/css/simple.css">
+<link rel="stylesheet" href="/css/mask.css">
+<link rel="stylesheet" href="/css/pad.css" media="only screen and (max-width : 768px)">
+
+
+<!-- <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/mask.css">
 <link rel="stylesheet" href="/css/pad.css" media="only screen and (max-width : 768px)">
+ -->
 
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
@@ -36,23 +43,8 @@
 </head>
 
 <body>
-	<%@ include file="/common/menu.jsp"%>
-	<%-- <div id="banner">
-		<div id="slideBox" class="slideBox">
-			<div class="bd">
-				<ul>
-					<c:set var="bannerArray" value="${fn:split('images/banner1.jpg,images/banner2.jpg,images/banner3.jpg,images/banner4.jpg,images/banner5.jpg', ',') }" />
-					<c:forEach var="banner" items="${bannerArray }">
-						<li>
-							<a href="javascript:void(0);">
-								<img src="/${banner}">
-							</a>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
-	</div> --%>
+	<%-- <%@ include file="/common/menu-new.jsp"%> --%>
+	<%@ include file="/common/menu-new.jsp"%>
 	<div class="container">
 		<div class="comwidth">
 			<!-- <h1>

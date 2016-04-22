@@ -11,9 +11,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.org.common.UserConstant;
 import com.org.util.CT;
 import com.org.utils.PropertyUtil;
 
@@ -58,6 +61,12 @@ public class UserSessionFilter implements Filter {
 				// 表示在列表中,不需要check session
 				chain.doFilter(request, response);
 				return;
+			}
+			JSONObject sessionUser = (JSONObject)req.getSession(true).getAttribute(UserConstant.SESSION_USER);
+			if(sessionUser == null){
+				sessionUser = new JSONObject();
+				sessionUser.put("id", 9999);
+				req.getSession(true).setAttribute(UserConstant.SESSION_USER, sessionUser);
 			}
 			/*JSONObject sessionUser = (JSONObject)req.getSession(true).getAttribute(UserConstant.SESSION_USER);
 			

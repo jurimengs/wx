@@ -12,8 +12,7 @@
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/simple.css">
 <link rel="stylesheet" href="/css/mask.css">
 <link rel="stylesheet" href="/css/pad.css" media="only screen and (max-width : 768px)">
 
@@ -33,7 +32,7 @@
 </head>
 
 <body>
-	<%@ include file="/common/menu.jsp"%>
+	<%@ include file="/common/menu-new.jsp"%>
 	<div id="banner">
 		<div id="slideBox" class="slideBox">
 			<div class="bd">

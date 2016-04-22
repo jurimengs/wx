@@ -24,6 +24,6 @@
 		<li class="login_li" onclick='formTo("channelForm", "/user/toLogin.do");'>登录网页版 >></li>
 	</ul>
 </div>
-
+<div class="top_fix">&nbsp;</div>
 <script type="text/javascript">
 </script>

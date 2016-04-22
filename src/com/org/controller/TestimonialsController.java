@@ -83,9 +83,16 @@ public class TestimonialsController extends SmpHttpServlet implements CommonCont
 		JSONObject sessionUser = (JSONObject)request.getSession().getAttribute(UserConstant.SESSION_USER);
 		String userId = sessionUser.getString("id");
 		
-		String contents = request.getParameter("testimonialsContent");
+		String contents = request.getParameter("contents");
 		String channelId = request.getParameter("channelId");
 		String title = request.getParameter("testimonialsTitle");
+		if(StringUtils.isEmpty(title)) {
+			if(contents.length() >= 20) {
+				title = contents.substring(0, contents.length());
+			} else {
+				title = contents;
+			}
+		}
 		
 		TestimonialsService tService = (TestimonialsService)BeanUtils.getBean("testimonialsService");
 		

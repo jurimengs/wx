@@ -17,11 +17,12 @@
 <link rel="stylesheet" href="/css/pad.css" media="only screen and (max-width : 768px)">
 
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="/css/kindeditor/default.css" />
-<link rel="stylesheet" href="/css/kindeditor/prettify.css" />
-<script charset="utf-8" src="/js/kindeditor/kindeditor.js"></script>
-<script charset="utf-8" src="/js/kindeditor/zh_CN.js"></script>
-<script charset="utf-8" src="/js/kindeditor/prettify.js"></script>
+<link rel="stylesheet" href="/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="/kindeditor/plugins/code/prettify.css" />
+<script charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="/kindeditor/plugins/code/prettify.js"></script>
+
 <script>
 	KindEditor.ready(function(K) {
 		var editor1 = K.create('textarea[name="contents"]', {
@@ -33,11 +34,11 @@
 				var self = this;
 				K.ctrl(document, 13, function() {
 					self.sync();
-					document.forms['example'].submit();
+					document.forms['commentsForm'].submit();
 				});
 				K.ctrl(self.edit.doc, 13, function() {
 					self.sync();
-					document.forms['example'].submit();
+					document.forms['commentsForm'].submit();
 				});
 			}
 		});
@@ -65,23 +66,30 @@
 <body>
 	<div class="container">
 		<%@ include file="/common/menu-new.jsp"%>
-		<div class="comwidth div_new">
-			<div>
-				选择频道
-				<select>
-					<option>1</option>
-					<option>1</option>
-					<option>1</option>
-					<option>1</option>
-				</select>
-			</div>
-			<div>
-				<textarea name="contents" style="width:100%; visibility:hidden;"></textarea>
-				<input type="submit" name="button" value="提交内容" /> (提交快捷键: Ctrl + Enter)
-			</div>
+		<div class="comwidth div_new" style="margin-top: 0px;">
+			<form method="post" id="commentsForm" action="/testimonials/saveContentsNoPic.do">
+				<div style="display:none;">
+					<input placeholder="主题" name="testimonialsTitle" id="testimonialsTitle" class="input-small commentsTitle">
+				</div>
+				<br />
+				<div>
+					<div>选择频道</div>
+					<select name="channelId" id="channelId">
+						<option value="0">生活频道</option>
+						<option value="1">情感频道</option>
+						<option value="2">工作频道</option>
+						<option value="3">其他频道</option>
+					</select>
+				</div>
+				<br />
+				<div>
+					<textarea name="contents" style="width:100%; visibility:hidden;" placeholder="内容" id="testimonialsContent" ></textarea>
+					<input type="submit" name="button" value="提交内容" /> (提交快捷键: Ctrl + Enter)
+				</div>
+			</form>
 		</div>
 	</div>
-	<%@ include file="/common/footer.jsp"%> 
+	<%-- <%@ include file="/common/footer.jsp"%>  --%>
 </body>
 
 <form id="channelForm" action="/channel/life.do">

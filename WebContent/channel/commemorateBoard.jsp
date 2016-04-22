@@ -31,7 +31,7 @@
 </head>
 
 <body>
-	<%@ include file="/common/menu.jsp"%>
+	<%@ include file="/common/menu-new.jsp"%>
 	<div class="container">
 		<div class="comwidth">
 			<c:forEach var="commemorate" items="${commemorateArray }" varStatus="ind">

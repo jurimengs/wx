@@ -53,9 +53,7 @@
 			</h1> -->
 			<section>
 			<div class="h1style zhuti-bar">
-			<span>坚强的人</span>不在人前流泪， 坚强的人不在人前诉苦， 坚强的人承受所有的压力，在夜深人静的时候默默擦拭伤口。<span>但是再坚强的人</span>，也需要一个懂你的人来听你倾诉， 让我成为那个懂你的人， 我是<span>人生百科</span>--本站献给所有为梦想拼搏在一线的互联网人.
-				<!-- 人生的每一次经历，<span>都是</span>一笔宝贵的财富，提高你的<span>人生</span>高度，
-				让<em><span> 人生百科 </span></em>记录你的足迹，留下属于你的每时每刻 -->
+			本站献给所有为梦想拼搏在一线的互联网人.
 			</div>
 			</section>
 			<!-- section one -->
@@ -70,7 +68,7 @@
 		</div>
 	</div>
 	<%@ include file="/common/footer.jsp"%> 
-	<%@ include file="/common/floatblock.jsp"%> 
+	<%@ include file="/common/floatblock.jsp"%>
 </body>
 
 <form id="channelForm" action="/channel/life.do" method="post" >

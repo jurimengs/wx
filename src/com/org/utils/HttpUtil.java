@@ -50,8 +50,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 /**
- * @author Nano
- * 
  *         HTTPClient 的封装
  */
 public class HttpUtil implements HttpTool {

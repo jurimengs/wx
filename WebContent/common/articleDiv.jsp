@@ -11,7 +11,7 @@
 				<img class="testim_img" src="${tms.filePath }" />
 			</c:if>
 		</a>
-		<c:if test="${tms.isTop ne '0'}">
+		<%-- <c:if test="${tms.isTop ne '0'}">
 		<div class="contents">
 			<strong>内容:</strong>
 			<c:set var="contentsLength" value="${fn:length(tms.contents)}" />
@@ -41,10 +41,10 @@
 			<a href="/comments/queryComments.do?testimonialsId=${tms.id }">
 				查看所有评价(${tms.commentCounts })
 			</a>
-			<%-- <a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
+			<a href="javascript:void(0);" onclick="allCommentsAbout('${tms.id}');">
 				查看所有评价
-			</a> --%>
+			</a>
 		</p>
-		</c:if>
+		</c:if> --%>
 	</div>
 </article>

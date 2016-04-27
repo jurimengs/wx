@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<footer>
+<!-- <footer>
 	<div class="comwidth">
 		<br>
 		<p class="fl">
@@ -20,14 +20,14 @@
 					排行榜
 				</a>
 			</li>
-			<!-- <li>
+			<li>
 				<a href="javascript:void(0);">
 					标签搜索
 				</a>
 				<span>
 					|
 				</span>
-			</li> -->
+			</li>
 			<li>
 				<a href="javascript:void(0);">
 					联系我们
@@ -36,14 +36,14 @@
 					|
 				</span>
 			</li>
-			<!-- <li>
+			<li>
 				<a href="javascript:void(0);">
 					积分获取
 				</a>
 				<span>
 					|
 				</span>
-			</li> -->
+			</li>
 			<li>
 				<a href="javascript:void(0);">
 					关于我们
@@ -83,4 +83,4 @@
 		<div style="position:absolute;"><div>本站微信公众号：</div><img style="max-width:100px;" src="/weixin/images/rsbk_weixin.jpg" /></div>
 		<div style="position:absolute;float: left; left: 200px;"><div>扫描下载安卓app：</div><img style="max-width:100px;" src="/app/images/rsbk_app.jpg" /></div>
 	</div>
-</footer>
+</footer> -->

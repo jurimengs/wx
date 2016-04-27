@@ -88,7 +88,7 @@ public class TestimonialsController extends SmpHttpServlet implements CommonCont
 		String title = request.getParameter("testimonialsTitle");
 		if(StringUtils.isEmpty(title)) {
 			if(contents.length() >= 20) {
-				title = contents.substring(0, contents.length());
+				title = contents.substring(0, 20);
 			} else {
 				title = contents;
 			}

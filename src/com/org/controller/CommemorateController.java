@@ -24,6 +24,7 @@ import com.org.services.busi.TestimonialsService;
 import com.org.servlet.SmpHttpServlet;
 import com.org.utils.BeanUtils;
 import com.org.utils.FileUploadUtil;
+import com.org.utils.StringUtil;
 
 /**
  * 纪念板
@@ -42,6 +43,16 @@ public class CommemorateController extends SmpHttpServlet implements CommonContr
 		JSONObject sessionUser = (JSONObject)session.getAttribute(UserConstant.SESSION_USER);
 		String userId = sessionUser.getString(UserConstant.USERID);
 		String comments = request.getParameter("comments");
+
+		// 对输入的内容进行过滤
+		if(StringUtil.notSafe(comments)) {
+			request.setAttribute(CommonConstant.RESP_CODE, "USER001");
+			request.setAttribute(CommonConstant.RESP_MSG, "您输入的内容存在不安全字符");
+			this.forward(PageConstant.ERROR, request, response);
+			return;
+		}
+
+
 		// TODO 上传图片先不管
 		//String fileId = request.getParameter("picPath");
 		String fileId = "";

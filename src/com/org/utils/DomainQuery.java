@@ -15,7 +15,18 @@ public class DomainQuery{
 	public void doQueryAll() {
 		List<String> list = new ArrayList<String>();
 		list = new ArrayList<String>();
-		list.add("greatdomain");
+//		list.add("ttt-v");
+//		list.add("tt-v");
+//		list.add("tt-vv");
+//		list.add("t-and-v");
+//		list.add("t-vv");
+//		list.add("ttvv");
+		list.add("tong-vanessa");
+		
+//		list.add("arsher");
+//		list.add("anquangou");
+//		list.add("anquanchi");
+//		list.add("anxingchi");
 		for (int i = 0; i < list.size(); i++) {
 			queryAim(list.get(i));
 		}

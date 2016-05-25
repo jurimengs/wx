@@ -6,12 +6,15 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import com.org.annotations.Init;
+import com.org.common.CommonConstant;
+import com.org.common.PageConstant;
 import com.org.interfaces.controller.CommonController;
 import com.org.services.busi.CommentsService;
 import com.org.servlet.SmpHttpServlet;
 import com.org.utils.BeanUtils;
 import com.org.utils.ByteUtil;
 import com.org.utils.DesUtil;
+import com.org.utils.StringUtil;
 
 @Init
 public class CommentsController extends SmpHttpServlet implements CommonController{
@@ -34,6 +37,14 @@ public class CommentsController extends SmpHttpServlet implements CommonControll
 		String commentContent = request.getParameter("commentContent");
 //		String userId = sessionUser.getString("id");
 		String userId = "1";
+		
+		// 对输入的内容进行过滤
+		if(StringUtil.notSafe(commentContent)) {
+			request.setAttribute(CommonConstant.RESP_CODE, "USER001");
+			request.setAttribute(CommonConstant.RESP_MSG, "您输入的内容存在不安全字符");
+			this.forward(PageConstant.ERROR, request, response);
+			return;
+		}
 		
 		CommentsService commentsService = (CommentsService)BeanUtils.getBean("commentsService");
 		commentsService.saveComments(testimonialsId, commentContent, userId);

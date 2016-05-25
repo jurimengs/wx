@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.org.annotations.Init;
+import com.org.common.Pager;
 import com.org.interfaces.controller.CommonController;
 import com.org.services.busi.ChannelService;
 import com.org.services.busi.CommemorateService;
@@ -31,8 +33,14 @@ public class ToTopController extends SmpHttpServlet implements CommonController{
 		
 		String topTimesGoal = PropertyUtil.getValue("business", "topTimesGoal");
 		ChannelService channelService = (ChannelService) BeanUtils.getBean("channelService");
-		String t_limit = "10";
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+		Pager pager = new Pager();
+		String currentPage = request.getParameter("currentPage");
+		if(StringUtils.isEmpty(currentPage)) {
+			currentPage = "1";
+		}
+		pager.setCurrentPage(Integer.valueOf(currentPage));
+		
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, pager);
 		
 		// 纪念板的第一个
 		CommemorateService commemorateService = (CommemorateService) BeanUtils.getBean("commemorateService");

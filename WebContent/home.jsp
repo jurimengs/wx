@@ -81,6 +81,14 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/business.js"></script>
 <script type="text/javascript">
+var time = 0;
+$(".zhuti-bar").each(function(){
+	var thisObj = $(this);
+	time += 50;
+	setTimeout(function(){
+		thisObj.slideDown();
+	}, time)
+});
 
 function createCommemorateDiv(){
 	if(!! "${commemorateDateTemp}" && "null" != "${commemorateDateTemp}"){

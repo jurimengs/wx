@@ -185,6 +185,32 @@ public class BaseDaoCiglib {
 		}			
 		return list;		
 	}
+	
+	public Integer queryCount(String sql, Map<Integer, Object> params, String key){
+		java.sql.Connection connection = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+		Integer returnInteger = null;
+		try{
+			connection = getConnection();
+			ps = connection.prepareStatement(sql);
+			setStatmentParams(ps, params);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				returnInteger = rs.getInt(key);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				releaseAll(rs, ps, connection);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return returnInteger;
+	}
 
 	private void releaseAll(ResultSet rs, PreparedStatement ps,
 			java.sql.Connection connection) throws SQLException {

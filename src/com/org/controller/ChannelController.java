@@ -6,11 +6,13 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.org.annotations.Init;
 import com.org.common.CommonConstant;
+import com.org.common.Pager;
 import com.org.interfaces.controller.CommonController;
 import com.org.services.busi.ChannelService;
 import com.org.services.busi.CommemorateService;
@@ -35,8 +37,16 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		
 		String topTimesGoal = PropertyUtil.getValue("business", "topTimesGoal");
 		ChannelService channelService = (ChannelService) BeanUtils.getBean("channelService");
-		String t_limit = "10";
-		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, t_limit);
+
+		Pager pager = new Pager();
+		String currentPage = request.getParameter("currentPage");
+		if(StringUtils.isEmpty(currentPage)) {
+			currentPage = "1";
+		}
+		
+		pager.setCurrentPage(Integer.valueOf(currentPage));
+		
+		JSONArray testimonialsArray = channelService.getTestimonialsByChannelId(null, pager);
 		
 		// 纪念板的第一个
 		CommemorateService commemorateService = (CommemorateService) BeanUtils.getBean("commemorateService");
@@ -47,11 +57,13 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		
 		// 假设查询到的永远只有100条数据，每列分25条数据
 		request.setAttribute("testimonialsArray", testimonialsArray);
+		request.setAttribute("pager", pager);
+		
 		
 		this.forward("/home.jsp", request, response);
 		return;
 	}
-	
+/*	
 	public void life(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("life。。。" );
@@ -124,9 +136,9 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		return;
 	}
 	
-	/*
+	
 	 * 纪念板
-	 */
+	 
 	public void commemorateBoard(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("纪念板。。。" );
@@ -142,9 +154,9 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		return;
 	}
 	
-	/*
+	
 	 * 友链
-	 */
+	 
 	public void friendLink(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 		log.info("友链。。。" );
@@ -160,6 +172,23 @@ public class ChannelController extends SmpHttpServlet implements CommonControlle
 		return;
 	}
 	
+	
+	public void pager(HttpServletRequest request,HttpServletResponse response) 
+			throws Exception{
+		log.info("pager。。。" );
+		String currentPage = request.getParameter("currentPage");
+		
+		if(StringUtils.isEmpty(currentPage)) {
+			currentPage = "1";
+		}
+		Pager pager = new Pager();
+		pager.setCurrentPage(Integer.valueOf(currentPage));
+		request.setAttribute("pager", pager);
+		
+		this.forward("/common/page.jsp", request, response);
+		return;
+	}
+	*/
 	private Log log = LogFactory.getLog(ChannelController.class);
 
 	@Override

@@ -24,6 +24,8 @@ import java.util.regex.Pattern;
 import com.org.common.CommonConstant;
 
 public class StringUtil {
+	private final static String REG_RULE ="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+	
     public static String mapStringToString(Map<String,String> map){
     	StringBuffer sb = null;
     	if(map != null && map.size() > 0){
@@ -886,12 +888,6 @@ public class StringUtil {
             return clazz.getName();
         }
     }
-     
-	public static void main(String [] args){
-		String s      = "sysCode[01]cardNo[7279906001000007]issueNo[050001]rechargeNo[0727990601000007]physicalNo[]expiredDate[20230528]";
-		
-		StringUtil.translateMap(s);	
-	}
 
 	public static String toEntityName(String fieldName, boolean toUpper) {
 		String newFieldName = "";
@@ -913,4 +909,26 @@ public class StringUtil {
     public static Long getTimestamp(){
     	return new Date().getTime()/1000;
     } 
+    
+    public static boolean notSafe(String content){
+    	Pattern   p   =   Pattern.compile(REG_RULE);
+    	Matcher   m   =   p.matcher(content); 
+    	return m.find(); 
+    }
+    
+    // 过滤特殊字符
+// 	public static String StringFilter(String   str)     {   
+//		String regEx="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+//		Pattern   p   =   Pattern.compile(regEx);   
+//		Matcher   m   =   p.matcher(str);   
+//		return   ""+m.find();   
+//	}   
+
+// 	public static void main(String[] args) {
+//		String s      = "sysCode[01]cardNo[7279906001000007]issueNo[050001]rechargeNo[0727990601000007]physicalNo[]expiredDate[20230528]";
+//		StringUtil.translateMap(s);	
+// 		String   str   =   "*adCVs*34_a _09_b5*[/435^*&城池()^$$&*).{}+.|.)%%*(*.中国}34{45[]12.fd'*&999下面是中文的字符￥……{}【】。，；’“‘”？";   
+//		System.out.println(str);   
+//		System.out.println(StringFilter(str));   
+//	}
 }

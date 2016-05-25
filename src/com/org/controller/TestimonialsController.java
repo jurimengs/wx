@@ -20,6 +20,7 @@ import com.org.services.busi.TestimonialsService;
 import com.org.servlet.SmpHttpServlet;
 import com.org.utils.BeanUtils;
 import com.org.utils.FileUploadUtil;
+import com.org.utils.StringUtil;
 
 @Init
 public class TestimonialsController extends SmpHttpServlet implements CommonController{
@@ -50,8 +51,23 @@ public class TestimonialsController extends SmpHttpServlet implements CommonCont
 		
 		JSONObject formParams = uploadResult.getJSONObject(CommonConstant.FORM_PARAMS);
 		String contents = formParams.getString("testimonialsContent");
-		String channelId = formParams.getString("channelId");
 		String title = formParams.getString("testimonialsTitle");
+		// 对输入的内容进行过滤
+		if(StringUtil.notSafe(contents)) {
+			request.setAttribute(CommonConstant.RESP_CODE, "USER001");
+			request.setAttribute(CommonConstant.RESP_MSG, "您输入的内容存在不安全字符");
+			this.forward(PageConstant.ERROR, request, response);
+			return;
+		}
+		// 对输入的内容进行过滤
+		if(StringUtil.notSafe(title)) {
+			request.setAttribute(CommonConstant.RESP_CODE, "USER001");
+			request.setAttribute(CommonConstant.RESP_MSG, "您输入的标题存在不安全字符");
+			this.forward(PageConstant.ERROR, request, response);
+			return;
+		}
+		
+		String channelId = formParams.getString("channelId");
 		String filePath = formParams.getString(CommonConstant.FILE_PATH);
 		
 		if (StringUtils.isEmpty(filePath)) {

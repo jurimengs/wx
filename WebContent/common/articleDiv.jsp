@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
+<style>
+.zhuti-bar {margin: 5px 5px; display: none;}
+</style>
 <article>
 	<div class="zhuti-bar <c:if test="${tms.isTop eq '0'}">totop</c:if>">
 		<a href="/comments/queryComments.do?testimonialsId=${tms.id }" class="zhuti">

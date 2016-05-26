@@ -6,7 +6,7 @@
 	<div class="comwidth">
 		<br>
 		<p class="fl">
-			人生BAI科 © 2015 www.rsbk.cc 版权所有
+			程序员BAI科 © 2015 www.rsbk.cc 版权所有
 			<span>
 				|
 			</span>

@@ -19,20 +19,20 @@ public class TypeImage implements Business<String> {
 
 	@Override
 	public String call() {
-		/*// ·¢ÏûÏ¢µÄÈË
+		/*// å‘æ¶ˆæ¯çš„äºº
 		String msgFromOpenid = xmlJson.getString("FromUserName");
-		// ÏûÏ¢Òª·´À¡µÄ¶ÔÏóÁĞ±í
+		// æ¶ˆæ¯è¦åé¦ˆçš„å¯¹è±¡åˆ—è¡¨
 		JSONArray chatingUserArray = WxUserContainer.getChatingUser();
-		// ·¢ÏûÏ¢ÕßµÄêÇ³Æ
+		// å‘æ¶ˆæ¯è€…çš„æ˜µç§°
 		Map<String, Boolean> chatingUsersMap = WxUserContainer.getChatingOpenidsMap();
-		// ÅĞ¶ÏÏÂÊÇ·ñÔÚÁÄÌìÊÒ
+		// åˆ¤æ–­ä¸‹æ˜¯å¦åœ¨èŠå¤©å®¤
 		String returnStr = "";
 		if(chatingUsersMap.containsKey(msgFromOpenid) && chatingUsersMap.get(msgFromOpenid)) {
 			returnStr = WxConstant.RETURN_SUCCESS;
-			// ´Ó×éÖĞ³ıÈ¥·¢ĞÅÏ¢Õß×Ô¼º
+			// ä»ç»„ä¸­é™¤å»å‘ä¿¡æ¯è€…è‡ªå·±
 			chatingUserArray.remove(msgFromOpenid);
-			// ·¢ÏûÏ¢ÕßµÄêÇ³Æ
-			// TODO Í¼ÎÄÏûÏ¢ÊÇÃ»°ì·¨Ìí¼ÓÕâ¸önickµÄ
+			// å‘æ¶ˆæ¯è€…çš„æ˜µç§°
+			// TODO å›¾æ–‡æ¶ˆæ¯æ˜¯æ²¡åŠæ³•æ·»åŠ è¿™ä¸ªnickçš„
 			String nick = "test";
 			
 			String mediaId = nick + ":\n"+xmlJson.getString("MediaId");

@@ -5,8 +5,9 @@
 <!-- 做分页 -->
 
 <style type="text/css">
-.page_div {text-align: right;}
-.page_div a {text-decoration: none; text-align: center; margin: 2px; }
+.page_div {text-align: right; margin-top: 20px; }
+.page_div a {text-decoration: none; text-align: center; border: 2px solid #dedede; margin: 3px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
+.page_div .a_fixed {padding-left: 4px;}
 .page_div a:hover {background-color: #ccc;}
 .currentPage {background-color: grey;}
 </style>
@@ -17,7 +18,7 @@
 <c:if test="${pager.begin gt 1 }">...</c:if>
 
 <c:forEach begin="${pager.begin }" end="${pager.end}" var="page" varStatus="p" >
-	<a href="?currentPage=${p.index }" <c:if test="${pager.currentPage eq p.index }"> class="currentPage" </c:if>>
+	<a class="a_fixed" href="?currentPage=${p.index }" <c:if test="${pager.currentPage eq p.index }"> class="currentPage" </c:if>>
 		${p.index }
 	</a>
 </c:forEach>

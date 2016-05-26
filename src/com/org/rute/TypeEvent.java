@@ -35,53 +35,53 @@ public class TypeEvent implements Business<String> {
 	public String call() throws Exception {
 		String FromUserName = xmlJson.getString("FromUserName");
 		String Event = xmlJson.getString("Event");
-		// ÄÃÊÂ¼şÀàĞÍ ºÍ µã»÷µÄ°´Å¥keyÖµÅĞ¶Ï ¿ÉÒÔ¾ö¶¨ÒµÎñÀàĞÍ
+		// æ‹¿äº‹ä»¶ç±»å‹ å’Œ ç‚¹å‡»çš„æŒ‰é’®keyå€¼åˆ¤æ–­ å¯ä»¥å†³å®šä¸šåŠ¡ç±»å‹
 		if(Event.equals("CLICK")) {
-			log.info("CLICK ÊÂ¼ş´¦Àí");
-			String EventKey = xmlJson.getString("EventKey"); // ¶ÔÓ¦×Ô¶¨ÒåµÄkey Öµ
+			log.info("CLICK äº‹ä»¶å¤„ç†");
+			String EventKey = xmlJson.getString("EventKey"); // å¯¹åº”è‡ªå®šä¹‰çš„key å€¼
 			JSONObject returns = null;
 			String content = "";
 			WxUser wxUser = WxUserContainer.getInstance().getLocalUser(FromUserName);
 			
 			JSONObject res = null;
 			if(WxUtil.ENTER_CHATING_ROOM.equals(EventKey)) {
-				// ¼ÓÈëÁÄÌìÊÒ
+				// åŠ å…¥èŠå¤©å®¤
 				if(wxUser.getRoomId() != null) {
-					// Èç¹ûÔÚ·¿¼äÖĞ£¬ÏÈÍË³ö
+					// å¦‚æœåœ¨æˆ¿é—´ä¸­ï¼Œå…ˆé€€å‡º
 					wxUser.exitChatingRoom();
 				}
 				res = wxUser.joininChatingRoom(Long.valueOf(RoomContainer.DEFAULT_ROOM_ID));
 			} else if(WxUtil.EXIT_CHATING_ROOM.equals(EventKey)) {
-				// ÍË³öÁÄÌìÊÒ
+				// é€€å‡ºèŠå¤©å®¤
 				res = wxUser.exitChatingRoom();
 			} else if(WxUtil.ENTER_STORE_ROOM.equals(EventKey)) {
-				// ½øÈë¹ÊÊÂÄ£Ê½
+				// è¿›å…¥æ•…äº‹æ¨¡å¼
 				if(wxUser.getRoomId() != null) {
-					// Èç¹ûÔÚ·¿¼äÖĞ£¬ÏÈÍË³ö
+					// å¦‚æœåœ¨æˆ¿é—´ä¸­ï¼Œå…ˆé€€å‡º
 					wxUser.exitChatingRoom();
 				}
 				res = wxUser.joininChatingRoom(Long.valueOf(RoomContainer.STORY_ROOM_ID));
 			} else if(WxUtil.EXIT_STORE_ROOM.equals(EventKey)) {
-				// ÍË³ö¹ÊÊÂÄ£Ê½
+				// é€€å‡ºæ•…äº‹æ¨¡å¼
 				res = wxUser.exitChatingRoom();
 				
 			}
 			
 			if(res != null) {
 
-				// »Ø¸´ÎÄ±¾ÏûÏ¢
+				// å›å¤æ–‡æœ¬æ¶ˆæ¯
 				if(res.getString(CommonConstant.RESP_CODE).equals("10000")) {
 					content = res.getString(CommonConstant.RESP_MSG);
 				} else {
-					content = "½øÈëÊ§°Ü£º"+res.getString(CommonConstant.RESP_MSG) ;
+					content = "è¿›å…¥å¤±è´¥ï¼š"+res.getString(CommonConstant.RESP_MSG) ;
 				}
 			} else {
-				content = "°¡³öÎÊÌâÀ²£¡Ïò¹ÜÀíÔ±·´Ó³°É£¡";
+				content = "å•Šå‡ºé—®é¢˜å•¦ï¼å‘ç®¡ç†å‘˜åæ˜ å§ï¼";
 			}
 			
 			returns = MessageUtil.sendToOne(content, FromUserName);
 			if(returns != null && (returns.getInt("errcode")==0)) {
-				log.info("ÏûÏ¢ÍÆËÍ³É¹¦");
+				log.info("æ¶ˆæ¯æ¨é€æˆåŠŸ");
 			}
 		} else if(Event.equals("unsubscribe") || Event.equals("subscribe")) {
 			
@@ -99,21 +99,21 @@ public class TypeEvent implements Business<String> {
 			uService.saveOrUpdate(FromUserName, nickname, sex, subscribe_time, subscribe, headimgurl, country, province, city);
 		} else if(Event.equals("LOCATION")) {
 			// {"ToUserName":"gh_b4c1774a1ef7","FromUserName":"osp6swrNZiWtEuTy-Gj1cBVA1l38","CreateTime":"1458029241","MsgType":"event","Event":"LOCATION","Latitude":"31.166275","Longitude":"121.389099","Precision":"30.000000"}
-			// ¾­¶È
+			// ç»åº¦
 			String Latitude = xmlJson.getString("Latitude");
-			// Î³¶È
+			// çº¬åº¦
 			String Longitude = xmlJson.getString("Longitude");
-			// ¾«¶È »ù±¾Ã»ÓÃ
+			// ç²¾åº¦ åŸºæœ¬æ²¡ç”¨
 			//String Precision = xmlJson.getString("Precision");
 			
 			StringBuffer temp = new StringBuffer();
-			temp.append("ÄúµÄµ±Ç°Î»ÖÃ:\n");
-			temp.append("Î³¶È:").append(Latitude);
+			temp.append("æ‚¨çš„å½“å‰ä½ç½®:\n");
+			temp.append("çº¬åº¦:").append(Latitude);
 			temp.append("\n");
-			temp.append("¾­¶È:").append(Longitude);
+			temp.append("ç»åº¦:").append(Longitude);
 			JSONObject returns = MessageUtil.sendToOne(temp.toString(), FromUserName);
 			if(returns != null && (returns.getInt("errcode")==0)) {
-				log.info("ÏûÏ¢ÍÆËÍ³É¹¦");
+				log.info("æ¶ˆæ¯æ¨é€æˆåŠŸ");
 			}
 		}
 		// 

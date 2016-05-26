@@ -7,10 +7,10 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>人生百科 WEB人生百科 webrsbk 人生百科登录页面</title>
+<title>程序员百科 WEB程序员百科 webrsbk 程序员百科登录页面</title>
 <meta name="description"
-	content="人生百科,WEB人生百科,webrsbk,提高你的人生高度,工作频道,生活频道,纪念版,创造人生价值,创造社会价值">
-<meta name="keywords" content="人生百科">
+	content="程序员百科,WEB程序员百科,webrsbk,提高你的程序员高度,工作频道,生活频道,纪念版,创造程序员价值,创造社会价值">
+<meta name="keywords" content="程序员百科">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -42,7 +42,7 @@ a {text-decoration: none; }
 		<%@ include file="/common/menu-new.jsp"%>
 		<div class="div_main_words">
 			<table class="table_main_words" cellpadding="3" cellspacing="0">
-				<tr><td colspan="2" class="td_words_title">人生百科 - 我们的网上家园</td></tr>
+				<tr><td colspan="2" class="td_words_title">程序员百科 - 我们的网上家园</td></tr>
 				<tr><td class="span_words_content_a">先吐为快</td><td >在这里没有什么不能明言</td></tr>
 				<tr><td >纪念板</td><td >这里的我们,都会为你的纪念点赞</td></tr>
 				<tr><td >猜猜我是谁</td><td >留下点蛛丝马迹, 让他们快乐的猜翻天</td></tr>

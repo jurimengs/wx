@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>人生百科 WEB人生百科 webrsbk 提高你的人生高度 工作频道 生活频道 纪念版 纪念 创造人生价值 创造社会价值</title>
-<meta name="description" content="人生百科,WEB人生百科,webrsbk,提高你的人生高度,工作频道,生活频道,纪念版,创造人生价值,创造社会价值">
-<meta name="keywords" content="人生百科">
+<title>程序员百科 WEB程序员百科 webrsbk 提高你的程序员高度 工作频道 生活频道 纪念版 纪念 创造程序员价值 创造社会价值</title>
+<meta name="description" content="程序员百科,WEB程序员百科,webrsbk,提高你的程序员高度,工作频道,生活频道,纪念版,创造程序员价值,创造社会价值">
+<meta name="keywords" content="程序员百科">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 
@@ -49,7 +49,7 @@
 		<div class="comwidth">
 			<!-- <h1>
 				感知生活<span>100%</span>了解您、<span>No.1</span>
-				国内首页人生BAI科平台、<span>1,000,000</span>位的访问者即将来临
+				国内首页程序员BAI科平台、<span>1,000,000</span>位的访问者即将来临
 			</h1> -->
 			<section>
 			<div class="h1style zhuti-bar">

@@ -39,7 +39,7 @@
 <header style="">
 	<div id="logo" class="fl">
 		<a href="javascript:void(0);" onclick="turnToIndex();">
-			人生<span>BAI</span>科 &nbsp;<span style="font: 12px/24px solid ">版本: 1.1</span>
+			程序员<span>BAI</span>科 &nbsp;<span style="font: 12px/24px solid ">版本: 1.1</span>
 		</a>
 	</div>
 	<nav id="pcmenu" class="fr">

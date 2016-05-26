@@ -215,7 +215,7 @@
 					'<div class="pop_up_box">' +
 					'<div class="modal-header" id="maskHeadDiv">' +
 						'<button id="maskCloseBtn" class="close" onclick="document.getElementById(\'maskDiv\').style.display=\'none\'; ">&times;</button>' +
-						'<div class="pop_title" style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;人生感言</div>' +
+						'<div class="pop_title" style="text-align:center;font-size:22px" id="maskTitleDiv">&nbsp;程序员感言</div>' +
 					'</div>' +
 					'<div class="modal-body" id="maskContentDiv">&nbsp;'+
 						'<form action="" id="commentsForm" enctype="multipart/form-data" method="post">&nbsp;'+

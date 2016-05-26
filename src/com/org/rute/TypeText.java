@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.org.caches.RoomContainer;
 import com.org.caches.WxUserContainer;
-import com.org.interfaces.room.Room;
 import com.org.interfaces.rute.Business;
 import com.org.model.wx.AbstractRoom;
 import com.org.model.wx.WxUser;
@@ -28,7 +27,7 @@ public class TypeText implements Business<String> {
 	
 	@Override
 	public String call() {
-		// ·¢ÏûÏ¢µÄÈË
+		// å‘æ¶ˆæ¯çš„äºº
 		String msgFromOpenid = xmlJson.getString("FromUserName");
 		String content = xmlJson.getString("Content");
 		
@@ -39,14 +38,14 @@ public class TypeText implements Business<String> {
 		String returnStr = "";
 		Long roomid = wxUser.getRoomId();
 		if(roomid != null) {
-			// Èç¹ûÔÚÁÄÌìÊÒÖĞ
-			log.info("µ±Ç°ÓÃ»§ËùÔÚ·¿¼äºÅ " + roomid);
+			// å¦‚æœåœ¨èŠå¤©å®¤ä¸­
+			log.info("å½“å‰ç”¨æˆ·æ‰€åœ¨æˆ¿é—´å· " + roomid);
 			AbstractRoom cr = RoomContainer.getInstance().getRoomById(roomid);
 			if(cr != null) {
-				// ·¢ËÍµÄ²Ù×÷£¬Ó¦¸ÃÊÇÓÉ·¿¼äÍê³É£¬·¿¼äÍê³É×Ô¼ºµÄÒµÎñÂß¼­£¬±ÈÈç·¢ËÍ£¬»ò·¢ËÍ+´æ´¢
+				// å‘é€çš„æ“ä½œï¼Œåº”è¯¥æ˜¯ç”±æˆ¿é—´å®Œæˆï¼Œæˆ¿é—´å®Œæˆè‡ªå·±çš„ä¸šåŠ¡é€»è¾‘ï¼Œæ¯”å¦‚å‘é€ï¼Œæˆ–å‘é€+å­˜å‚¨
 				cr.sendToAll(wxUser, content);
 			} else {
-				log.info("·¿¼ä²»´æÔÚ: " + roomid);
+				log.info("æˆ¿é—´ä¸å­˜åœ¨: " + roomid);
 			}
 		} else {
 			returnStr = WxUtil.autoReply(xmlJson);

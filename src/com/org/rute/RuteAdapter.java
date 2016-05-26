@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import com.org.interfaces.rute.Business;
 
 /**
- * Â·ÓÉÊÊÅäÆ÷£¬¾ö¶¨µ±Ç°ÇëÇóÓÉË­À´´¦Àí
+ * è·¯ç”±é€‚é…å™¨ï¼Œå†³å®šå½“å‰è¯·æ±‚ç”±è°æ¥å¤„ç†
  * @author Administrator
  *
  */
@@ -21,7 +21,7 @@ public class RuteAdapter {
 		}
 		Business<String> e = null;
 		String msgType = xmlJson.getString("MsgType");
-		log.info("ÇëÇóÏûÏ¢ÀàĞÍ====>"+msgType);
+		log.info("è¯·æ±‚æ¶ˆæ¯ç±»å‹====>"+msgType);
 		if(msgType.equals("event")) {
 			e = new TypeEvent(xmlJson);
 		} else if(msgType.equals("text")) {

@@ -1,17 +1,13 @@
 package com.org.controller.wx;
 
-import java.io.IOException;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -27,9 +23,6 @@ import com.org.servlet.SmpHttpServlet;
 import com.org.threads.RuteThreadPool;
 import com.org.util.CT;
 import com.org.utils.DateUtil;
-import com.org.utils.HttpTool;
-import com.org.utils.HttpUtil;
-import com.org.utils.StringUtil;
 import com.org.utils.XmlUtils;
 import com.org.wx.utils.WxUtil;
 
@@ -110,6 +103,14 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		return WxUtil.replyStr("系统出现异常，请联系管理员，错误时间：" + dateStr, xmlJson);
 	}
 	
+	public void initMenu(HttpServletRequest request, HttpServletResponse response) {
+		String resMsg = WxUtil.createMenu();
+		log.info("initMenu ====> " + resMsg);
+		this.write(resMsg, CommonConstant.UTF8, response);
+		return;
+	}
+	
+/*
 	// TODO 测试用的
 	public void getCacheToken(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String token = WxUtil.getToken();
@@ -127,11 +128,41 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		return;
 	}
 	
-	public void initMenu(HttpServletRequest request, HttpServletResponse response) {
-		String resMsg = WxUtil.createMenu();
-		log.info("initMenu ====> " + resMsg);
-		this.write(resMsg, CommonConstant.UTF8, response);
-		//this.forward("/www/html/wxtest.jsp", request, response);
+	public void addPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String iconUrl ="http://mmbiz.qpic.cn/mmbiz/7SgQeGs3O4Bcv3hZtP6gf6NtuWJxcDwvNtO57VN5IqPPlyTnkHr3ic18tYDL9yp7Fefh7PNgAfQ8RXUxgAK5PCA/0?wx_fmt=jpeg";
+		iconUrl = URLEncoder.encode(iconUrl, "UTF-8");
+		String title ="主标题";
+		String description ="副标题";
+		String pageUrl ="http://www.rsbk.cc/mall/shake.jsp";
+		String comment ="";
+		JSONObject param = new JSONObject();
+		param.put("icon_url", iconUrl);
+		param.put("comment", comment);
+		param.put("page_url", pageUrl);
+		param.put("description", description);
+		param.put("title", title);
+
+		String url = "https://api.weixin.qq.com/shakearound/page/add?access_token=".concat(WxUtil.getToken());
+		HttpTool http = new HttpUtil();
+		JSONObject res = http.wxHttpsPost(param, url);
+		log.info("添加摇一摇页面：" + res.toString());
+		this.write(res, CommonConstant.UTF8, response);
+		return;
+	}
+	
+	
+	public void getMertialsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		JSONObject param = new JSONObject();
+		param.put("type", "image"); // 素材的类型，图片（image）、视频（video）、语音 （voice）、图文（news
+		param.put("offset", "0"); // 从全部素材的该偏移位置开始返回，0表示从第一个素材 返回
+		param.put("count", "20"); // 返回素材的数量，取值在1到20之间
+
+		String url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=".concat(WxUtil.getToken());
+		HttpTool http = new HttpUtil();
+		JSONObject res = http.wxHttpsPost(param, url);
+		log.info("getMertialsList：" + res.toString());
+		this.write(res, CommonConstant.UTF8, response);
 		return;
 	}
 	
@@ -141,11 +172,11 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		return;
 	}
 	
-	/**
+	*//**
 	 * 申请开通摇一摇
 	 * @param request
 	 * @param response
-	 */
+	 *//*
 	public void applicationYao(HttpServletRequest request, HttpServletResponse response) {
 		
 		JSONObject param = new JSONObject();
@@ -163,11 +194,11 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		return;
 	}
 	
-	/**
+	*//**
 	 * 申请开通摇一摇 查询审核状态
 	 * @param request
 	 * @param response
-	 */
+	 *//*
 	public void applicationYaoResult(HttpServletRequest request, HttpServletResponse response) {
 		
 		JSONObject param = new JSONObject();
@@ -191,7 +222,7 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		}
 		return;
 	}
-	
+	*/
 	public void post(HttpServletRequest request, HttpServletResponse response) {
 		
 	}

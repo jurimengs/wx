@@ -15,6 +15,7 @@ import com.org.services.WxUserService;
 import com.org.utils.BeanUtils;
 import com.org.utils.DateUtil;
 import com.org.wx.utils.MessageUtil;
+import com.org.wx.utils.SuanMing;
 import com.org.wx.utils.WxUserUtil;
 import com.org.wx.utils.WxUtil;
 
@@ -100,17 +101,21 @@ public class TypeEvent implements Business<String> {
 		} else if(Event.equals("LOCATION")) {
 			// {"ToUserName":"gh_b4c1774a1ef7","FromUserName":"osp6swrNZiWtEuTy-Gj1cBVA1l38","CreateTime":"1458029241","MsgType":"event","Event":"LOCATION","Latitude":"31.166275","Longitude":"121.389099","Precision":"30.000000"}
 			// 经度
-			String Latitude = xmlJson.getString("Latitude");
+			String latitude = xmlJson.getString("Latitude");
 			// 纬度
-			String Longitude = xmlJson.getString("Longitude");
+			String longitude = xmlJson.getString("Longitude");
+			log.info("经度：" + latitude + "；纬度：" + longitude);
 			// 精度 基本没用
 			//String Precision = xmlJson.getString("Precision");
 			
 			StringBuffer temp = new StringBuffer();
-			temp.append("您的当前位置:\n");
-			temp.append("纬度:").append(Latitude);
-			temp.append("\n");
-			temp.append("经度:").append(Longitude);
+//			temp.append("您的当前位置:\n");
+//			temp.append("纬度:").append(Latitude);
+//			temp.append("\n");
+//			temp.append("经度:").append(Longitude);
+			
+			temp.append("根据您当前的经度和纬度推算您今天的时运:\n");
+			temp.append(SuanMing.byLocation(latitude, longitude));
 			JSONObject returns = MessageUtil.sendToOne(temp.toString(), FromUserName);
 			if(returns != null && (returns.getInt("errcode")==0)) {
 				log.info("消息推送成功");

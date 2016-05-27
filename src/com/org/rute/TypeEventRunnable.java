@@ -8,8 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import com.org.caches.RoomContainer;
 import com.org.caches.WxUserContainer;
 import com.org.common.CommonConstant;
-import com.org.common.WxConstant;
-import com.org.interfaces.rute.Business;
 import com.org.model.wx.WxUser;
 import com.org.services.WxUserService;
 import com.org.utils.BeanUtils;
@@ -24,16 +22,24 @@ import com.org.wx.utils.WxUtil;
  * @author Administrator
  *
  */
-public class TypeEvent implements Business<String> {
-	private Log log = LogFactory.getLog(TypeEvent.class);
+public class TypeEventRunnable implements Runnable {
+	private Log log = LogFactory.getLog(TypeEventRunnable.class);
 	private JSONObject xmlJson;
 
-	public TypeEvent(JSONObject xmlJson) {
+	public TypeEventRunnable(JSONObject xmlJson) {
+		this.xmlJson = xmlJson;
+	}
+	
+	public JSONObject getXmlJson() {
+		return xmlJson;
+	}
+
+	public void setXmlJson(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
 	}
 
 	@Override
-	public String call() throws Exception {
+	public void run() {
 		String FromUserName = xmlJson.getString("FromUserName");
 		String Event = xmlJson.getString("Event");
 		// 拿事件类型 和 点击的按钮key值判断 可以决定业务类型
@@ -124,15 +130,6 @@ public class TypeEvent implements Business<String> {
 			}
 		}
 		// 
-		return WxConstant.RETURN_SUCCESS;
-	}
-	
-	public JSONObject getXmlJson() {
-		return xmlJson;
-	}
-
-	public void setXmlJson(JSONObject xmlJson) {
-		this.xmlJson = xmlJson;
 	}
 	
 }

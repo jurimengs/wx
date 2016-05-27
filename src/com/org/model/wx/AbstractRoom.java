@@ -5,25 +5,25 @@ import java.util.List;
 
 public abstract class AbstractRoom {
 	private Long roomid;
-	// 房间名称
+	// 鎴块棿鍚嶇О
 	private String roomname;
-	// 房间主题 
+	// 鎴块棿涓婚 
 	private String roomtitle;
-	// 模板id
+	// 妯℃澘id
 	private Long templateid;
-	// 是否故事模式
+	// 鏄惁鏁呬簨妯″紡
 	private Boolean storymode;
-	// 用户openid集合
+	// 鐢ㄦ埛openid闆嗗悎
 	protected List<String> userList = new ArrayList<String>();
-	// 角色list
+	// 瑙掕壊list
 	protected List<String> roleNameList = new ArrayList<String>();
-	// 模板章节list
+	// 妯℃澘绔犺妭list
 	protected List<String> nodeList = new ArrayList<String>();
 
 	public void join(String openid){
 		if(!userList.contains(openid)) {
 			userList.add(openid);
-			// 由于主要是从内存中读取信息进行处理，所以只更改内存中的用户房间状态，数据库状态更新，采用定时任务更新
+			// 鐢变簬涓昏鏄粠鍐呭瓨涓鍙栦俊鎭繘琛屽鐞嗭紝鎵�浠ュ彧鏇存敼鍐呭瓨涓殑鐢ㄦ埛鎴块棿鐘舵�侊紝鏁版嵁搴撶姸鎬佹洿鏂帮紝閲囩敤瀹氭椂浠诲姟鏇存柊
 		}
 	}
 
@@ -42,7 +42,7 @@ public abstract class AbstractRoom {
 			if(roleNameList != null && roleNameList.size() > 0) {
 				return roleNameList.remove(0);
 			}
-			return "游客";
+			return "娓稿";
 		}
 	}
 

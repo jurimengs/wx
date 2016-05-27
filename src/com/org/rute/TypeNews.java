@@ -23,6 +23,7 @@ public class TypeNews implements Business<String> {
 	@Override
 	public String call() {
 		// TODO 
+		log.info("TypeNews.call()...");
 		return null;
 	}
 	

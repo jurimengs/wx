@@ -1,7 +1,7 @@
 package com.org.model.reflect;
 
 /**
- * ÓÃÓÚ·´ÉäÊ±,ÁÙÊ±´æ·ÅÊı¾İµÄÈİÆ÷
+ * ç”¨äºåå°„æ—¶,ä¸´æ—¶å­˜æ”¾æ•°æ®çš„å®¹å™¨
  * @author Administrator
  *
  */

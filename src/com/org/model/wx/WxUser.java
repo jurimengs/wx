@@ -22,7 +22,7 @@ public class WxUser {
 	private String province;
 	private String city;
 	private String password;
-	// ¹ÊÊÂÄ£Ê½µÄÃû×Ö
+	// æ•…äº‹æ¨¡å¼çš„åå­—
 	private String storyNickName;
 
 	/**
@@ -33,20 +33,20 @@ public class WxUser {
 	public JSONObject joininChatingRoom(Long roomId){
 		this.roomId = roomId;
 		JSONObject res = new JSONObject();
-		// ¸ù¾İroomidÑ°ÕÒroom
+		// æ ¹æ®roomidå¯»æ‰¾room
 		AbstractRoom cr = RoomContainer.getInstance().getRoomById(roomId);
 		if(cr != null) {
 			log.info("joininChatingRoom " + roomId);
 			
-			// ½øÈëÖ®Ç°ÒªÏÈÉèÖÃÓÃ»§µÄ¹ÊÊÂ½ÇÉ«Ãû
+			// è¿›å…¥ä¹‹å‰è¦å…ˆè®¾ç½®ç”¨æˆ·çš„æ•…äº‹è§’è‰²å
 			this.storyNickName = cr.getRandomRoleName();
 			
 			cr.join(openid);
 			res.put(CommonConstant.RESP_CODE, "10000");
-			res.put(CommonConstant.RESP_MSG, "½øÈë³É¹¦");
+			res.put(CommonConstant.RESP_MSG, "è¿›å…¥æˆåŠŸ");
 		} else {
 			res.put(CommonConstant.RESP_CODE, "error");
-			res.put(CommonConstant.RESP_MSG, "·¿¼ä²»´æÔÚ");
+			res.put(CommonConstant.RESP_MSG, "æˆ¿é—´ä¸å­˜åœ¨");
 		}
 		return res;
 	}
@@ -58,28 +58,28 @@ public class WxUser {
 	 */
 	public JSONObject exitChatingRoom(){
 		JSONObject res = new JSONObject();
-		// ¸ù¾İroomidÑ°ÕÒroom
+		// æ ¹æ®roomidå¯»æ‰¾room
 		AbstractRoom cr = RoomContainer.getInstance().getRoomById(roomId);
 		if(cr != null) {
 			if(StringUtils.isNotEmpty(openid)) {
 				this.roomId = null;
 				cr.exit(openid);
 				res.put(CommonConstant.RESP_CODE, "10000");
-				res.put(CommonConstant.RESP_MSG, "ÍË³ö³É¹¦");
+				res.put(CommonConstant.RESP_MSG, "é€€å‡ºæˆåŠŸ");
 			} else {
 				res.put(CommonConstant.RESP_CODE, "error");
-				res.put(CommonConstant.RESP_MSG, "ÓÃ»§Î´³õÊ¼»¯£¬openidÎª¿Õ");
+				res.put(CommonConstant.RESP_MSG, "ç”¨æˆ·æœªåˆå§‹åŒ–ï¼Œopenidä¸ºç©º");
 			}
 		} else {
 			res.put(CommonConstant.RESP_CODE, "error");
-			res.put(CommonConstant.RESP_MSG, "ÓÃ»§Î´ÔÚ·¿¼äÖĞ");
+			res.put(CommonConstant.RESP_MSG, "ç”¨æˆ·æœªåœ¨æˆ¿é—´ä¸­");
 		}
 		return res;
 	}
 
 	public WxUser(){
 		/*this.openid = openid;
-		// »ñÈ¡ÓÃ»§ĞÅÏ¢£¬²¢³õÊ¼»¯
+		// è·å–ç”¨æˆ·ä¿¡æ¯ï¼Œå¹¶åˆå§‹åŒ–
 		JSONObject localUser = WxUserContainer.getInstance().getLocalUser(openid);
 		if(localUser != null) {
 			this.nickname = localUser.getString("nickname");

@@ -5,26 +5,17 @@ import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.org.interfaces.rute.Business;
-
 /**
  * request from wx , type is "news"
  * @author Administrator
  *
  */
-public class TypeVoice implements Business<String> {
+public class TypeVoiceRunnable implements Runnable {
 	private Log log = LogFactory.getLog(this.getClass().getName());
 	private JSONObject xmlJson;
 
-	public TypeVoice(JSONObject xmlJson) {
+	public TypeVoiceRunnable(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
-	}
-
-	@Override
-	public String call() {
-		// TODO 
-		log.info("TypeVoice.call()...");
-		return null;
 	}
 	
 	public JSONObject getXmlJson() {
@@ -33,6 +24,12 @@ public class TypeVoice implements Business<String> {
 
 	public void setXmlJson(JSONObject xmlJson) {
 		this.xmlJson = xmlJson;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		log.info("TypeVoiceRunnable.run()...");
 	}
 	
 }

@@ -33,6 +33,10 @@ public class RuteThreadPool {
 	public static <T> Future<T> submit(Callable<T> callable) throws InterruptedException, ExecutionException  {
 		return rute.submit(callable);
 	}
+
+	public static void execute(Runnable run) {
+		rute.execute(run);
+	}
 	
 	public static void shutdown(){
 		rute.shutdown();

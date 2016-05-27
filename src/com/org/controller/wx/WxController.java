@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.org.annotations.Init;
 import com.org.common.CommonConstant;
+import com.org.common.WxConstant;
 import com.org.interfaces.controller.CommonController;
 import com.org.interfaces.rute.Business;
 import com.org.rute.RuteAdapter;
@@ -59,8 +60,11 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 		JSONObject xmlJson = XmlUtils.getDocumentFromRequest(request);
 		log.info("收到微信服务器的消息：xmlJson=====> " + xmlJson);
-		
-		String result = dealBusiness(xmlJson);
+
+		// 多线程同步返回处理
+		//String result = dealBusiness(xmlJson);
+		// 多线程异步无返回处理
+		String result = dealBusinessRunnable(xmlJson);
 		this.write(result, CommonConstant.UTF8, response);
 		return;
 	}
@@ -76,31 +80,12 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		JSONObject xmlJson = JSONObject.fromObject("{\"ToUserName\":\"gh_b4c1774a1ef7\",\"FromUserName\":\"osp6swrNZiWtEuTy-Gj1cBVA1l38\",\"CreateTime\":\"1458533297\",\"MsgType\":\"text\",\"Content\":\"。\",\"MsgId\":\"6264352811146407227\"}");
 		log.info("收到微信服务器的消息：xmlJson=====> " + xmlJson);
 		
-		String result = dealBusiness(xmlJson);
+		// 多线程同步返回处理
+		//String result = dealBusiness(xmlJson);
+		// 多线程异步无返回处理
+		String result = dealBusinessRunnable(xmlJson);
 		this.write(result, CommonConstant.UTF8, response);
 		return;
-	}
-	
-	private String dealBusiness(JSONObject xmlJson){
-		Business<String> event = RuteAdapter.adapter(xmlJson);
-		String dateStr = DateUtil.getyyyyMMddHHmmss();
-		try {
-			Future<String> result = RuteThreadPool.submit(event);
-			if(result != null) {
-				return result.get(4, TimeUnit.SECONDS);// 4秒后超时
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			log.info(dateStr + "--> dealBusiness InterruptedException: " + e.getMessage());
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-			log.info(dateStr + "--> dealBusiness ExecutionException: " + e.getMessage());
-		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return WxUtil.replyStr("信息处理超时，请联系管理员，错误时间：" + dateStr, xmlJson);
-		}
-		return WxUtil.replyStr("系统出现异常，请联系管理员，错误时间：" + dateStr, xmlJson);
 	}
 	
 	public void initMenu(HttpServletRequest request, HttpServletResponse response) {
@@ -227,4 +212,42 @@ public class WxController extends SmpHttpServlet implements CommonController{
 		
 	}
 	
+
+	/**
+	 * 多线程同步返回处理
+	 * @param xmlJson
+	 * @return
+	 */
+	private String dealBusiness(JSONObject xmlJson){
+		Business<String> event = RuteAdapter.adapter(xmlJson);
+		String dateStr = DateUtil.getyyyyMMddHHmmss();
+		try {
+			Future<String> result = RuteThreadPool.submit(event);
+			if(result != null) {
+				return result.get(4, TimeUnit.SECONDS);// 4秒后超时
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			log.info(dateStr + "--> dealBusiness InterruptedException: " + e.getMessage());
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+			log.info(dateStr + "--> dealBusiness ExecutionException: " + e.getMessage());
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return WxUtil.replyStr("信息处理超时，请联系管理员，错误时间：" + dateStr, xmlJson);
+		}
+		return WxUtil.replyStr("系统出现异常，请联系管理员，错误时间：" + dateStr, xmlJson);
+	}
+	
+	/**
+	 * 多线程异步无返回处理
+	 * @param xmlJson
+	 * @return
+	 */
+	private String dealBusinessRunnable(JSONObject xmlJson) throws InterruptedException, ExecutionException{
+		Runnable event = RuteAdapter.adapterRunnable(xmlJson);
+		RuteThreadPool.execute(event);
+		return WxConstant.RETURN_SUCCESS;
+	}
 }

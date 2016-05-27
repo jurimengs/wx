@@ -14,7 +14,7 @@ public class ChatingRoom extends AbstractRoom {
 		log.info("ChatingRoom === > sendToAll");
 		String nick = wxUser.getNickname();
 		//MessageUtil.sendToMultiByQueue(nick + ":\n" + content, userList);
-		// 队列的消耗有点大，改用线程池
+		// 闃熷垪鐨勬秷鑰楁湁鐐瑰ぇ锛屾敼鐢ㄧ嚎绋嬫睜
 		MessageUtil.sendToMultiByThreadPool(nick + ":\n" + content, userList);
 	}
 	

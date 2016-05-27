@@ -45,6 +45,8 @@ public class MessageUtil {
 		// 调用客服接口发送消息 
 		String urlTemp = url.concat(Memcache.getInstance().getValue(CommonConstant.WX_TOKEN_KEY));
 		HttpTool http = new HttpUtil();
+		log.info("pushMessage send url ====> " + urlTemp);
+		log.info("pushMessage send paramContent ====> " + paramContent);
 		JSONObject returns = http.wxHttpsPost(paramContent, urlTemp);
 		log.info("pushMessage returns====> " + returns);
 

@@ -36,7 +36,7 @@ public class WxUtil {
 	 * 故事模式
 	 */
 	public static final String ENTER_STORE_ROOM = "enterStoryRoom";
-	public static final String EXIT_STORE_ROOM = "enterStoryRoom";
+	public static final String EXIT_STORE_ROOM = "exitStoryRoom";
 	
 	private static final String WX_TICKET = "wxTicket"; // 微信端的ticket
 	private static final String ACCESS_TOKEN_KEY = "access_token";

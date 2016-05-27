@@ -16,12 +16,12 @@ public class StoryRoom extends AbstractRoom{
 	public void sendToAll(WxUser wxUser, String content) {
 		log.info("StoryRoom === > sendToAll");
 		String rolename = wxUser.getStoryNickName();
-		// TODO ¹ÊÊÂÄ£Ê½£¬Òª½«ÓÃ»§·¢ËÍµÄĞÅÏ¢±£´æÏÂÀ´£¬
+		// TODO æ•…äº‹æ¨¡å¼ï¼Œè¦å°†ç”¨æˆ·å‘é€çš„ä¿¡æ¯ä¿å­˜ä¸‹æ¥ï¼Œ
 		if(!story.isOver()) {
 			StoryService storyService = (StoryService)BeanUtils.getBean("storyService");
 			storyService.saveStory(getTemplateid(), rolename, content, "");
 		}
-		// ÕâÀïµÄÃû×ÖÒªÓÃ¹ÊÊÂÃû
+		// è¿™é‡Œçš„åå­—è¦ç”¨æ•…äº‹å
 		MessageUtil.sendToMultiByQueue(rolename + ":\n" + content, userList);
 	}
 	

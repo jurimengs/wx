@@ -6,9 +6,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * ¶ÓÁÐÖ´ÐÐÕß, ÓÃÓÚ´¦Àí¶ÓÁÐÖÐµÄÈÎÎñ
+ * ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
  * @author zhou_man
- * 2016Äê3ÔÂ15ÈÕ
+ * 2016ï¿½ï¿½3ï¿½ï¿½15ï¿½ï¿½
  */
 public class QueueContainer{
 	private static Log log = LogFactory.getLog(QueueContainer.class);
@@ -16,12 +16,12 @@ public class QueueContainer{
 	protected static LinkedBlockingQueue<MessageSendTask> queue = new LinkedBlockingQueue<MessageSendTask>();
 
 	/**
-	 * Èç¹û¶ÓÁÐÂú£¬Ôò×èÈû
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param task
 	 */
 	public static void addTask(MessageSendTask task){
 		try {
-			log.info("QueueExecutor Ìí¼ÓÈÎÎñ£½£½£½£½¡µ"+task.toString());
+			log.info("QueueContainer ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ñ£½£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+task.toString());
 			queue.put(task);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class QueueContainer{
 	}
 	
 	/**
-	 * Èç¹û¶ÓÁÐ¿Õ£¬Ôò×èÈû
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ð¿Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param task
 	 */
 	public static MessageSendTask getTask(){

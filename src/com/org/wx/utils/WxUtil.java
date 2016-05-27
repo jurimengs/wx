@@ -248,7 +248,7 @@ public class WxUtil {
 		String token = Memcache.getInstance().getValue(CommonConstant.WX_TOKEN_KEY);
 
 		JSONArray menuArray = new JSONArray();
-		Properties p = PropertyUtil.getProperties("wx_botton_menu");
+		Properties p = PropertyUtil.getPropertiesReload("wx_botton_menu");
 		String[] menuKeys = {"menua", "menub", "menuc"};
 		for (int i = 0; i < menuKeys.length; i++) {
 			// 一级

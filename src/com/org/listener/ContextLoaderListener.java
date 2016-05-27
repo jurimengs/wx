@@ -76,6 +76,7 @@ public class ContextLoaderListener implements ServletContextListener{
 		log.info("3. ==============> ClassContext 加载完成...");
 		
 		HikaricpMysqlDataSource.getInstance().init();
+		log.info("3. ==============> HikaricpMysqlDataSource 加载完成...");
 	    /*10. start socket server */
 //	    IServerSocket serverSocket = (IServerSocket)sc.getBean(CT.SPRING_BEANNAME_JNIOSERVERSOCKET);//SPRING_BEANNAME_JNIOSERVERSOCKET,SPRING_BEANNAME_SERVERSOCKET
 //	    serverSocket.start();

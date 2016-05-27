@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.org.utils.FileUtil;
 import com.org.utils.PropertyUtil;
 
 /**
@@ -45,10 +46,8 @@ public class ClassContext {
      * @return
      */
     private void findAllClassFilesAndInitToContainer(String aimpath){
-    	String phyPath = ClassContext.class.getClassLoader().getResource("").getPath();
-
-		//String phyPath = "/WEB-INF/classes/";
-		
+    	//String phyPath = "/WEB-INF/classes/";
+    	String phyPath = FileUtil.getPhysicalPath();
 		
 		String aimpathTemp = aimpath.replaceAll("\\.", "/");
 		
@@ -77,10 +76,7 @@ public class ClassContext {
 	}
     
 	private void loadOrNot(String fileNameTemp) throws ClassNotFoundException {
-		
 		Class<?> classTemp = ClassContext.class.getClassLoader().loadClass(fileNameTemp);
-		
-		//Class<?> classTemp = Class.forName(fileNameTemp);
 		if(classTemp.getAnnotation(Init.class) != null) {
 			try {
 				String classTempName = classTemp.getSimpleName();

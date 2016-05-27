@@ -1,6 +1,7 @@
 package com.org.utils;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -9,9 +10,10 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.org.container.CommonContainer;
 /**
  * 
  * .properties file include 
@@ -23,65 +25,36 @@ public class PropertyUtil {
 	public static Map<String,Properties>  proMaps = new HashMap<String, Properties>();
 	
 	public static void initProperties(ServletContext webContext){
-		InputStream in = null;
-		String coreFile = "/WEB-INF/config/core.properties";
-		String simpleCoreFileName = "core";
-		try {
-			String propertiesMode= "model_type";
-			String propertiesPath = "properties_path";
-			String propertiesFilePrefix = "properties_prefix";
-			String propertiesFileNames = "properties_file_names";
-			String connSymbol = "_";
-			in = webContext.getResourceAsStream(coreFile);
-			if(in != null){
-				Properties coreProperty = new Properties();
-				coreProperty.load(in);
-				proMaps.put(simpleCoreFileName, coreProperty);
-				String mode = coreProperty.getProperty(propertiesMode);
-				String path = coreProperty.getProperty(propertiesPath);
-				String prefix = coreProperty.getProperty(propertiesFilePrefix);
-				prefix = StringUtils.isEmpty(prefix) ? "" : prefix + connSymbol;
-				
-				String files = coreProperty.getProperty(propertiesFileNames);
-				if(files != null){
-					String[] names = files.split(",");
-					for (int i = 0; i < names.length; i++) {
-						String file = path + "/" + prefix + names[i].trim()+ connSymbol + mode +".properties";
-						String simpleName = names[i].trim();
-						InputStream pin = null;
-						try{						
-							pin = webContext.getResourceAsStream(file);
-							if(pin == null){
-								file = path + "/" + prefix + names[i].trim()+".properties";
-								pin = webContext.getResourceAsStream(file);
-							}
-							Properties pro = new Properties();
-							pro.load(pin);
-							proMaps.put(simpleName, pro);
-							log.info("加载配置参数文件"+file+"成功....");
-						}catch (IOException e) {
-							log.info("加载配置参数文件"+file+"失败,原因:"+ e.getMessage());
-					    }finally{
-							if(pin  != null)
-								try {
-									pin.close();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-						}
-					}
+
+		// Web-Info/class
+		// 通过读取物理路径，来获取目录下的当前配置文件列表
+    	String phyPath = FileUtil.getPhysicalPath();
+    	phyPath = phyPath.replace("classes", "config");
+		File f = new File(phyPath);
+		
+		InputStream is = null;
+		if(f.exists()) {
+			// 列出所有的配置文件
+			String[] fileArray = f.list();
+			String fileName = null;
+			String simpleName = null;
+			
+			for (int i = 0; i < fileArray.length; i++) {
+				fileName = fileArray[i];
+				try {
+					// linux 为 \ 
+					simpleName = fileName.replace(".properties", "");
+					fileName = "\\WEB-INF\\config\\"+fileArray[i];
+					is = webContext.getResourceAsStream(fileName);
+					Properties pro = new Properties();
+					pro.load(is);
+					proMaps.put(simpleName, pro);
+					log.info("加载配置参数文件" + fileName + "成功....");
+				}catch(Exception e) {
+					log.info("加载配置文件失败：" + fileName);
+					log.info(e.getMessage());
 				}
 			}
-			log.info("加载配置参数文件"+coreFile+"成功....");
-		}catch (IOException e) {
-			log.info("加载配置配置参数文件"+coreFile+"失败,原因:"+ e.getMessage());
-	    } finally{
-			if(in  != null)
-				try {
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 		}
 	}
 
@@ -90,6 +63,18 @@ public class PropertyUtil {
 			return proMaps.get(name);
 		}
 		return null;
+	}
+
+	public static Properties getPropertiesReload(String name){
+		String realName = "\\WEB-INF\\config\\" + name + ".properties";
+		InputStream is = CommonContainer.getServletContext().getResourceAsStream(realName);
+		Properties pro = new Properties();
+		try {
+			pro.load(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return pro;
 	}
 	
 	public static String getValue(String name,String key){

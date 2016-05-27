@@ -347,6 +347,25 @@ public class WxUserService {
 		return res;
 	}
 	
+	/**
+	 * 判断是否已经推送过算命消息了
+	 * @return
+	 */
+	public boolean saveSuanming(String fromUserName, String content){
+		Date date = DateUtil.getDateFrom(new Date(), 0);
+		Map<Integer, Object> params = new HashMap<Integer, Object>();
+		params.put(1, fromUserName);
+		params.put(2, DateUtil.format(date, DateUtil.yyyyMMdd));
+		params.put(3, content);
+		
+		String sql = "insert into wx_suanming_push openid = ?, createtime = ?, content= ?";
+		CommonDao commonDao = (CommonDao)BeanUtils.getBean("commonDao");
+		boolean res = commonDao.addSingle(sql, params);
+		return res;
+	}
+	
+	
+	
 	private String matchStr(String from){
 		Pattern pattern = Pattern.compile(pattrn);
 		Matcher matcher = pattern.matcher(from);

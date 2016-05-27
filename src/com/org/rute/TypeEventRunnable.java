@@ -134,6 +134,9 @@ public class TypeEventRunnable implements Runnable {
 			
 			JSONObject returns = MessageUtil.sendToOne(temp.toString(), FromUserName);
 			if(returns != null && (returns.getInt("errcode")==0)) {
+				// 推送成功， 保存到库
+				// TODO 未测试
+				wxService.saveSuanming(FromUserName, temp.toString());
 				log.info("消息推送成功");
 			}
 		}

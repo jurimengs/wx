@@ -182,12 +182,6 @@ public class CommonDao extends BaseDaoCiglib {
 			}
 		}
 	}
-
-	public JSONObject isExist(String sql, Map<Integer, Object> params, List<String> secretColumn) throws SvcException {
-		JSONObject user = null;
-		user = queryJSONObject(sql, params, secretColumn);
-		return user;
-	}
 	
 	/**
 	 * 事务插入。建议不大于10000条

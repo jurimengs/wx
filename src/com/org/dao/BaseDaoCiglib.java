@@ -15,6 +15,7 @@ import java.util.Map;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.cglib.beans.BeanMap;
 
 import com.org.util.StringUtil;
@@ -258,4 +259,31 @@ public class BaseDaoCiglib {
 		return map;
 	}
 
+	public boolean isExist(String sql, Map<Integer, Object> params) {
+		java.sql.Connection connection = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		boolean res = false;
+		try{
+			connection = getConnection();
+			ps = connection.prepareStatement(sql);
+			setStatmentParams(ps, params);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				if(StringUtils.isNotEmpty(rs.getString("exist"))) {
+					res = true;
+				}
+				break;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				releaseAll(rs, ps, connection);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}			
+		return res;
+	}
 }

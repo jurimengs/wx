@@ -262,3 +262,19 @@ CREATE TABLE `wx_story` (
 
 --------------------- TODO resource
 
+
+-- ----------------------------
+-- Table structure for `wx_suanming_push` 算命功能表。记录下今天某某是否推送过。
+-- ----------------------------
+DROP TABLE IF EXISTS `wx_suanming_push`;
+CREATE TABLE `wx_suanming_push` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(50) NOT NULL,
+  `content` varchar(500) default NULL,
+  `createtime` varchar(14),
+  `status` varchar(1) default '0', -- 0: 表示已推送
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--------------------- TODO resource
+

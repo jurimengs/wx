@@ -6,9 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * ����ִ����, ���ڴ�������е�����
  * @author zhou_man
- * 2016��3��15��
  */
 public class QueueContainer{
 	private static Log log = LogFactory.getLog(QueueContainer.class);
@@ -16,12 +14,11 @@ public class QueueContainer{
 	protected static LinkedBlockingQueue<MessageSendTask> queue = new LinkedBlockingQueue<MessageSendTask>();
 
 	/**
-	 * ��������������
 	 * @param task
 	 */
 	public static void addTask(MessageSendTask task){
 		try {
-			log.info("QueueContainer ������񣽣�������"+task.toString());
+			log.info("QueueContainer "+task.toString());
 			queue.put(task);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -29,7 +26,6 @@ public class QueueContainer{
 	}
 	
 	/**
-	 * �����пգ�������
 	 * @param task
 	 */
 	public static MessageSendTask getTask(){

@@ -62,10 +62,15 @@ public class DateUtil
 //    {
 //        return date.replaceAll("-", "");
 //    }
-    
+
     public static String getDateStringByFormat(String format){
         SimpleDateFormat df = new SimpleDateFormat(format);// 设置日期格式
         return df.format(new Date());
+    }
+    
+    public static String format(Date date, String format){
+        SimpleDateFormat df = new SimpleDateFormat(format);// 设置日期格式
+        return df.format(date);
     }
 
     /**
@@ -191,6 +196,41 @@ public class DateUtil
         return list;
     }
 
+
+    /**
+     *  当前日期+N天后的日期, 0点0分0秒
+     * @param from　从算起
+     * @param n　天数（可为负）
+     * @return　Date类型返回
+     */
+    public static Date getDateFrom(Date from, int n) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(from);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.add(Calendar.DATE, n);
+        Date d2 = c.getTime();
+        return d2;
+    }
+
+    /**
+     *  当前日期+N天后的日期, 23点59分59秒
+     * @param from　从算起
+     * @param n　天数（可为负）
+     * @return　Date类型返回
+     */
+    public static Date getDateTo(Date from, int n) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(from);
+        c.set(Calendar.HOUR_OF_DAY, 23);
+        c.set(Calendar.MINUTE, 59);
+        c.set(Calendar.SECOND, 59);
+        c.add(Calendar.DATE, n);
+        Date d2 = c.getTime();
+        return d2;
+    }
+    
     public static void main(String[] args)
     {
         List<String> list = getBeforeMonthList();

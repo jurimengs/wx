@@ -105,6 +105,14 @@ public class TypeEventRunnable implements Runnable {
 			WxUserService uService = (WxUserService)BeanUtils.getBean("wxUserService");
 			uService.saveOrUpdate(FromUserName, nickname, sex, subscribe_time, subscribe, headimgurl, country, province, city);
 		} else if(Event.equals("LOCATION")) {
+			
+			// 先判断这个人今天是否已经被推送过算命消息了
+			WxUserService wxService = (WxUserService)BeanUtils.getBean("wxUserService");
+			boolean res = wxService.hasSentSuanming(FromUserName);
+			if(res) {
+				log.info("LOCATION 今天已算过命了: " + FromUserName);
+				return;
+			}
 			// {"ToUserName":"gh_b4c1774a1ef7","FromUserName":"osp6swrNZiWtEuTy-Gj1cBVA1l38","CreateTime":"1458029241","MsgType":"event","Event":"LOCATION","Latitude":"31.166275","Longitude":"121.389099","Precision":"30.000000"}
 			// 经度
 			String latitude = xmlJson.getString("Latitude");

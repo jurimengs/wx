@@ -20,9 +20,11 @@ import com.org.common.WxConstant;
 import com.org.interfaces.controller.CommonController;
 import com.org.interfaces.rute.Business;
 import com.org.rute.RuteAdapter;
+import com.org.services.WxUserService;
 import com.org.servlet.SmpHttpServlet;
 import com.org.threads.RuteThreadPool;
 import com.org.util.CT;
+import com.org.utils.BeanUtils;
 import com.org.utils.DateUtil;
 import com.org.utils.XmlUtils;
 import com.org.wx.utils.WxUtil;
@@ -209,7 +211,9 @@ public class WxController extends SmpHttpServlet implements CommonController{
 	}
 	*/
 	public void post(HttpServletRequest request, HttpServletResponse response) {
-		
+		// TODO test
+		WxUserService wxService = (WxUserService)BeanUtils.getBean("wxUserService");
+		boolean res = wxService.hasSentSuanming("323");
 	}
 	
 

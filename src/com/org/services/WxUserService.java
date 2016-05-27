@@ -2,6 +2,7 @@ package com.org.services;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -330,6 +331,22 @@ public class WxUserService {
 		return res;
 	}
 	
+	/**
+	 * 判断是否已经推送过算命消息了
+	 * @return
+	 */
+	public boolean hasSentSuanming(String fromUserName){
+		Date date = DateUtil.getDateFrom(new Date(), 0);
+		Map<Integer, Object> params = new HashMap<Integer, Object>();
+		params.put(1, fromUserName);
+		params.put(2, DateUtil.format(date, DateUtil.yyyyMMdd));
+		
+		String sql = "select 1 as exist from wx_suanming_push where openid = ? and createtime = ? and status ='0' ";
+		CommonDao commonDao = (CommonDao)BeanUtils.getBean("commonDao");
+		boolean res = commonDao.isExist(sql, params);
+		return res;
+	}
+	
 	private String matchStr(String from){
 		Pattern pattern = Pattern.compile(pattrn);
 		Matcher matcher = pattern.matcher(from);
@@ -347,10 +364,19 @@ public class WxUserService {
 	public static void main(String[] args) {
 		String str = "中是H★ 要 H★KかS  Micky ߌ»Icey  Storm hߔ®";
 		try {
+			WxUserService ws = new WxUserService();
+			ws.hasSentSuanming("");
+			
 			String ss = Base64.encode(str.getBytes("UTF-8"));
 			System.err.println(ss);
 			byte[] ssaa = Base64.decode(ss);
 			System.err.println(new String(ssaa, "UTF-8"));
+			
+
+			System.out.println("==="+new String(Base64.decode("5ZGo5L+K"), "UTF-8") );
+			System.out.println("==="+new String(Base64.decode("QWkn5bCP5a6J"), "UTF-8") );
+			System.out.println("==="+new String(Base64.decode("5peB6KeC6ICF"), "UTF-8") );
+		
 			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

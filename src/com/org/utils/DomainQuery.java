@@ -21,8 +21,8 @@ public class DomainQuery{
 //		list.add("t-and-v");
 //		list.add("t-vv");
 //		list.add("ttvv");
-		list.add("tvbrand");
-		list.add("brandtv");
+		list.add("tvfns");
+		list.add("fnstv");
 		
 //		list.add("arsher");
 //		list.add("anquangou");
